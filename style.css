@@ -1,0 +1,21 @@
+.chart rect{
+    fill:aquamarine;
+    -webkit-transition: all .75s;
+    -moz-transition: all .75s;
+    transition: all .75s;
+}
+#tooltip{
+    border: 1px solid black;
+    border-radius: 6px;
+    position: absolute;
+    display: none;
+    padding: 6px;
+}
+#app{
+    margin-left: auto;
+    margin-right: auto;
+    width: 1000px;
+}
+line{
+    stroke:black; 
+}
