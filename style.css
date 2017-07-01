@@ -1,8 +1,11 @@
 .chart rect{
-    fill:aquamarine;
-    -webkit-transition: all .75s;
-    -moz-transition: all .75s;
-    transition: all .75s;
+    fill: blueviolet;
+    -webkit-transition: all .5s;
+    -moz-transition: all .5s;
+    transition: all .5s;
+}
+.chart rect:hover{
+    fill: rosybrown;
 }
 #tooltip{
     border: 1px solid black;
@@ -10,6 +13,7 @@
     position: absolute;
     display: none;
     padding: 6px;
+    background-color: royalblue;
 }
 #app{
     margin-left: auto;

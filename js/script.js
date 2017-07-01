@@ -19,7 +19,7 @@ d3.select('svg')
     .attr('width',800);
 ////////////////////////////////////////
 //Setting some arrays of data
-var data = [600,1200,600,800,20000,15000,1000,5000,8000];
+var data = [600,1200,600,800,20000,15000,1000,5000,8000,600,1200,600,800,20000,15000,1000,5000,8000,600,1200,600,800,20000,15000,1000,5000,8000,600,1200,600,800,20000,15000,1000,5000,8000,600,1200,600,800,20000,15000,1000,5000,8000,600,1200,600,800,20000,15000,1000,5000,8000,600,1200,600,800,20000,15000,1000,5000,8000,600,1200,600,800,20000,15000,1000,5000,8000,600,1200,600,800,20000,15000,1000,5000,8000,600,1200,600,800,20000,15000,1000,5000,8000];
 var dataReferencies = [0,3000,6000,9000,12000,15000];
 
 var tooltip = document.getElementById('tooltip');
@@ -44,3 +44,25 @@ chart.selectAll('rect')
     .attr('x',function(d,i){return barWidth*i})
     .attr('width',barWidth)
     .attr('height',function(d){return scale2(d)})
+    .on('mouseover',function(){
+
+        tooltip.style.display='block';
+
+        if(window.innerWidth>1000){
+            tooltip.style.left= parseInt(d3.select(this).attr('x'),10)+100+barWidth+(window.innerWidth-1000)/2+'px';
+        }
+        else tooltip.style.left= parseInt(d3.select(this).attr('x'),10)+110+barWidth+'px';
+
+        })
+    .on('mouseout',function(){
+
+        tooltip.style.display='none';
+
+    })
+    .on('mousemove',function(d,i){
+
+        tooltip.style.top= d3.mouse(this)[1]+50+'px';
+
+        tooltip.innerHTML=data[i];
+
+    });
