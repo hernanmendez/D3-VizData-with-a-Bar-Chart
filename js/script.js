@@ -1,3 +1,4 @@
+function callback(Data){
 //Adding The SVG and The 2 main Groups
 d3.select('#app')
   .append('svg')
@@ -17,11 +18,12 @@ d3.select('svg')
     .attr('transform','translate(100,50)')
     .attr('height',400)
     .attr('width',800);
-////////////////////////////////////////
+////////////////////////////////////////s
 //Setting some arrays of data
-var data = [600,1200,600,800,20000,15000,1000,5000,8000,600,1200,600,800,20000,15000,1000,5000,8000,600,1200,600,800,20000,15000,1000,5000,8000,600,1200,600,800,20000,15000,1000,5000,8000,600,1200,600,800,20000,15000,1000,5000,8000,600,1200,600,800,20000,15000,1000,5000,8000,600,1200,600,800,20000,15000,1000,5000,8000,600,1200,600,800,20000,15000,1000,5000,8000,600,1200,600,800,20000,15000,1000,5000,8000,600,1200,600,800,20000,15000,1000,5000,8000];
+var data = Data.data.data.map(function(info){return info[1]});
 var dataReferencies = [0,3000,6000,9000,12000,15000];
 
+//selecting
 var tooltip = document.getElementById('tooltip');
 var chart = d3.select('.chart');
 
@@ -63,7 +65,47 @@ chart.selectAll('rect')
 
         tooltip.style.top= d3.mouse(this)[1]+50+'px';
 
-        tooltip.innerHTML=data[i]+' Billion';
+        var month;
+        switch (Data.data.data[i][0][5] + Data.data.data[i][0][6]) {
+            case "01":
+                month = "January";
+                break;
+            case "02":
+                month = "February";
+                break;
+            case "03":
+                month = "March";
+                break;
+            case "04":
+                month = "April";
+                break;
+            case "05":
+                month = "May";
+                break;
+            case "06":
+                month = "June";
+                break;
+            case "07":
+                month = "July";
+                break;
+            case "08":
+                month = "August";
+                break;
+            case "09":
+                month = "September";
+                break;
+            case "10":
+                month = "October";
+                break;
+            case "11":
+                month = "November";
+                break;
+            case "12":
+                month = "December";
+                break;
+        }
+
+        tooltip.innerHTML=data[i]+' Billion <br/>'+Data.data.data[i][0].slice(0,4)+' '+month;
 
     });
 
@@ -74,7 +116,7 @@ d3.select('.axes')
   .append('text')
     .text(function(d){return d})
     .attr('x',92)
-    .attr('y',function(d){return parseInt(scale(d),10)+54;})
+    .attr('y',function(d){return parseInt(scale(d),10)+54;});
             
 d3.select('.axes')
     .selectAll('g')
@@ -84,25 +126,28 @@ d3.select('.axes')
     .attr('x1','92')
     .attr('x2','97')
     .attr('y1',function(d){return parseInt(scale(d),10)+50;})
-    .attr('y2',function(d){return parseInt(scale(d),10)+50;})
+    .attr('y2',function(d){return parseInt(scale(d),10)+50;});
 
 d3.select('svg')
   .append('text')
     .text('Gross Domestic Product, USA')
     .attr('class','blue big')
     .attr('x',500)
-    .attr('y',25)
+    .attr('y',25);
 
 d3.select('svg')
   .append('text')
     .text('Units: Billions of Dollars Seasonal Adjustment: Seasonally Adjusted Annual Rate Notes: A Guide to the National Income and Product Accounts of the United States (NIPA)')
     .attr('class','blue small')
     .attr('x',500)
-    .attr('y',470)
+    .attr('y',470);
 
 d3.select('svg')
   .append('text')
     .text('(http://www.bea.gov/national/pdf/nipaguid.pdf)')
     .attr('class','blue small')
     .attr('x',500)
-    .attr('y',484)
+    .attr('y',484);
+}
+axios.get('https://raw.githubusercontent.com/FreeCodeCamp/ProjectReferenceData/master/GDP-data.json')
+            .then(callback)
