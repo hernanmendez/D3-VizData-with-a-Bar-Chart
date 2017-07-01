@@ -19,18 +19,21 @@ d3.select('svg')
     .attr('height',400)
     .attr('width',800);
 ////////////////////////////////////////s
-//Setting some arrays of data
+//Setting array of data
 var data = Data.data.data.map(function(info){return info[1]});
-var dataReferencies = [0,3000,6000,9000,12000,15000];
+//setting the axes's values
+var dataReferencies = [0,3000,6000,9000,12000,15000,18000];
 
 //selecting
 var tooltip = document.getElementById('tooltip');
 var chart = d3.select('.chart');
 
+//setting the barWidth and adding the width and height of the chart on variables
 var width = 800;
 var height = 400;
 var barWidth = width / data.length;
 
+//Making the scale functions
 var scale=d3.scaleLinear()
     .domain([0,d3.max(data)])
     .range([height,0]);
@@ -39,6 +42,7 @@ var scale2=d3.scaleLinear()
     .domain([0,d3.max(data)])
     .range([0,height]);
 
+//using the data to make the charts
 chart.selectAll('rect')
     .data(data)
   .enter().append('rect')
@@ -62,7 +66,7 @@ chart.selectAll('rect')
 
     })
     .on('mousemove',function(d,i){
-
+        //setting the tooltip position based on the mouse Y position
         tooltip.style.top= d3.mouse(this)[1]+50+'px';
 
         var month;
@@ -109,6 +113,7 @@ chart.selectAll('rect')
 
     });
 
+//setting the axes numbers
 d3.select('.axes')
     .selectAll('g')
     .data(dataReferencies)
@@ -117,7 +122,8 @@ d3.select('.axes')
     .text(function(d){return d})
     .attr('x',92)
     .attr('y',function(d){return parseInt(scale(d),10)+54;});
-            
+
+//setting the axes lines     
 d3.select('.axes')
     .selectAll('g')
     .selectAll('line')
@@ -128,6 +134,7 @@ d3.select('.axes')
     .attr('y1',function(d){return parseInt(scale(d),10)+50;})
     .attr('y2',function(d){return parseInt(scale(d),10)+50;});
 
+//setting the text
 d3.select('svg')
   .append('text')
     .text('Gross Domestic Product, USA')
@@ -149,5 +156,6 @@ d3.select('svg')
     .attr('x',500)
     .attr('y',484);
 }
+//making the call to get the data
 axios.get('https://raw.githubusercontent.com/FreeCodeCamp/ProjectReferenceData/master/GDP-data.json')
-            .then(callback)
+            .then(callback);
