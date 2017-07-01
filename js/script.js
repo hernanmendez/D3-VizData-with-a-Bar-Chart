@@ -63,6 +63,46 @@ chart.selectAll('rect')
 
         tooltip.style.top= d3.mouse(this)[1]+50+'px';
 
-        tooltip.innerHTML=data[i];
+        tooltip.innerHTML=data[i]+' Billion';
 
     });
+
+d3.select('.axes')
+    .selectAll('g')
+    .data(dataReferencies)
+  .enter().append('g')
+  .append('text')
+    .text(function(d){return d})
+    .attr('x',92)
+    .attr('y',function(d){return parseInt(scale(d),10)+54;})
+            
+d3.select('.axes')
+    .selectAll('g')
+    .selectAll('line')
+    .data(dataReferencies)
+  .enter().append('line')
+    .attr('x1','92')
+    .attr('x2','97')
+    .attr('y1',function(d){return parseInt(scale(d),10)+50;})
+    .attr('y2',function(d){return parseInt(scale(d),10)+50;})
+
+d3.select('svg')
+  .append('text')
+    .text('Gross Domestic Product, USA')
+    .attr('class','blue big')
+    .attr('x',500)
+    .attr('y',25)
+
+d3.select('svg')
+  .append('text')
+    .text('Units: Billions of Dollars Seasonal Adjustment: Seasonally Adjusted Annual Rate Notes: A Guide to the National Income and Product Accounts of the United States (NIPA)')
+    .attr('class','blue small')
+    .attr('x',500)
+    .attr('y',470)
+
+d3.select('svg')
+  .append('text')
+    .text('(http://www.bea.gov/national/pdf/nipaguid.pdf)')
+    .attr('class','blue small')
+    .attr('x',500)
+    .attr('y',484)

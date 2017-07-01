@@ -23,3 +23,18 @@
 line{
     stroke:black; 
 }
+text{
+    font-size: 12px;
+    fill: black;
+    text-anchor: end;
+}
+.blue{
+    fill: #66f;
+    text-anchor: middle;
+}
+.big{
+    font-size: 30px;
+}
+.small{
+    font-size: 12px;
+}
